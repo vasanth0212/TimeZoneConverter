@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Timezone Converter</title>
+    <style>
+        body{
+            background-color: aqua;
+        }
+        fieldset{
+            margin:auto;
+            margin-left: 300px;
+            margin-right: 300px;
+            background-color: rgb(240, 218, 235);
+        }
+        legend{
+            font-size: 30px;
+            padding:7px;    
+        }
+        #zone span{
+            font-size: 20px;
+            color: blue;
+        }
+        .heading{
+            font-size: 30px;
+            color:red;
+        }
+        select{
+            color: rgb(204, 0, 255);
+            font-size: 18px;
+        }
+        button{
+            color: rgb(255, 0, 242);
+            font-size: 18px;
+            padding: 5px;
+        }
+       #day{
+        color: rgb(30, 238, 11);
+       }
+       #time{
+        color: rgb(30, 238, 30)
+       }
+    </style>
+</head>
+<body>
+    <center>
+            <div class="heading">
+                <h1>Time Zone Converter</h1>
+            </div>
+            
+            <div id="zone">
+                <fieldset>
+                    <legend><b>Enter current India's Time</b></legend>
+                    <br>
+                    <span><b>Enter Hour in 24Hour: </b></span><input type="text" id="hour"><br><br>
+                    <span><b>Enter Minuetes: </b></span><input type="text" id="min"><br><br>
+                    <select id="city">
+                        <option>Select a city</option>
+                        <option>London</option>
+                        <option>Australia</option>
+                        <option>NewYork</option>
+                    </select><br><br>
+                    <button onclick="myFunction()"><b>Get Time!</b></button>
+                    <h1 id="day"></h1>
+                    <h1 id="time"></h1>
+                </fieldset>
+            </div>
+    </center>
+    <script>
+        function myFunction(){
+            var x=document.getElementById("city").value;
+            var hr=document.getElementById("hour").value;
+            var min=document.getElementById("min").value;
+            if(hr=="" || min=="")
+            {
+                alert("Enter both hours and minuetes");
+                return;
+            }
+            if(x=="Select a city")
+            {
+                alert("Please select a city");
+            }
+            if(hr<0 || hr>24 || min<0 || min>59)
+            {
+                alert("Enter valid time in 24 hours format");
+                return;
+            }
+            hr=parseInt(hr);
+            min=parseInt(min);
+            if(x=="London")
+            {
+                if(min>=30)
+                {
+                    hr=hr-4;
+                }
+                else
+                {
+                    hr=hr-5;
+                }
+                min=(min-30+60)%60;
+                if(hr<0)
+                {
+                    hr=hr+24;
+                    document.getElementById("day").innerHTML="The Previous Day";
+                    if(min<10)
+                    {
+                        document.getElementById("time").innerHTML="The Current Time in London is :"+hr+": 0"+min;
+                    }
+                    else
+                    {
+                        document.getElementById("time").innerHTML="The Current Time in London is :"+hr+":"+min;
+                    }
+                }
+                else if(hr<10)
+                {
+                    document.getElementById("day").innerHTML="Same Day";
+                    if(min<10)
+                    {
+                        document.getElementById("time").innerHTML="The Current Time in London is :"+" 0"+hr+": 0"+min;
+                    }
+                    else
+                    {
+                        document.getElementById("time").innerHTML="The Current Time in London is :"+" 0"+hr+":"+min;
+                    } 
+                }
+                else
+                {
+                    document.getElementById("day").innerHTML="Same Day";
+                    if(min<10)
+                    {
+                        document.getElementById("time").innerHTML="The Current Time in London is : "+hr+": 0"+min;
+                    }
+                    else
+                    {
+                        document.getElementById("time").innerHTML="The Current Time in London is : "+hr+":"+min;
+                    } 
+                } 
+            }
+            else if(x=="Australia")
+            {
+                if(min>=30)
+                {
+                    hr+=5;
+                }
+                else
+                {
+                    hr+=4;
+                }
+                min=(min+30)%60;
+                if(hr>=24)
+                {
+                    hr=hr%24;
+                    document.getElementById("day").innerHTML="The Next Day";
+                    if(min<10)
+                    {
+                        document.getElementById("time").innerHTML="The Current Time in Australia is "+hr+":0"+min;
+                    }
+                    else
+                    {
+                        document.getElementById("time").innerHTML="The Current Time in Australia is "+hr+":"+min;
+                    }
+                }
+                else if(hr<10)
+                {
+                    document.getElementById("day").innerHTML="Same Day";
+                    if(min<10)
+                    {
+                        document.getElementById("time").innerHTML="The Current Time in Australia is "+" 0"+hr+":0"+min;
+                    }
+                    else
+                    {
+                        document.getElementById("time").innerHTML="The Current Time in Australia is "+" 0"+hr+":"+min;
+                    } 
+                }
+                else
+                {
+                    document.getElementById("day").innerHTML="Same Day";
+                    if(min<10)
+                    {
+                        document.getElementById("time").innerHTML="The Current Time in Australia is "+hr+":0"+min;
+                    }
+                    else
+                    {
+                        document.getElementById("time").innerHTML="The Current Time in Australia is "+hr+":"+min;
+                    } 
+                }
+            }
+            else
+            {
+                if(min<30)
+                {
+                    hr=hr-10;
+                }
+                else
+                {
+                    hr=hr-9;
+                }
+                min=(min-30+60)%60;
+                if(hr<0)
+                {
+                    hr+=24;
+                    document.getElementById("day").innerHTML="Previous Day";
+                    if(min<10)
+                    {
+                        document.getElementById("time").innerHTML="The Current Time in NewYork is "+hr+":0"+min;
+                    }
+                    else
+                    {
+                        document.getElementById("time").innerHTML="The Current Time in NewYork is "+hr+":"+min;
+                    }
+                }
+                else if(hr<10)
+                {
+                    document.getElementById("day").innerHTML="Same Day";
+                    if(min<10)
+                    {
+                        document.getElementById("time").innerHTML="The Current Time in NewYork is "+"0"+hr+":0"+min;
+                    }
+                    else
+                    {
+                        document.getElementById("time").innerHTML="The Current Time in NewYork is "+"0"+hr+":"+min;
+                    } 
+                }
+                else
+                {
+                    document.getElementById("day").innerHTML="Same Day";
+                    if(min<10)
+                    {
+                        document.getElementById("time").innerHTML="The Current Time in NewYork is "+hr+":0"+min;
+                    }
+                    else
+                    {
+                        document.getElementById("time").innerHTML="The Current Time in NewYork is "+hr+":"+min;
+                    } 
+                }
+            }
+        
+        }
+    </script>
+</body>
+</html>
